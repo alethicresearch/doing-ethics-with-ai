@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Research page for 'Doing Ethics with AI' — practical ethics engineering and SACRE methodology">
+  <title>Doing Ethics with AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=DM+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── CSS Custom Properties ─────────────────────────────────────────── */
+    :root {
+      --bg: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-tertiary: #9b9b9b;
+      --border: #e8e8e8;
+      --accent-red: #D85A30;
+      --accent-blue: #185FA5;
+      --accent-green: #0F6E56;
+      --accent-amber: #BA7517;
+      --accent-purple: #7C3AED;
+      --code-bg: #f5f5f0;
+      --font-display: 'EB Garamond', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'Fira Code', 'Courier New', monospace;
+      --max-w: 760px;
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Layout ─────────────────────────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Top Bar ────────────────────────────────────────────────────────── */
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .topbar-sigil {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+
+    .topbar-name {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+    }
+
+    .topbar-email {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .topbar-email a {
+      color: var(--text-secondary);
+    }
+
+    .topbar-email a:hover {
+      color: var(--text-primary);
+      text-decoration: underline;
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 56px 0 48px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 5.5vw, 40px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+
+    .hero-authors {
+      font-size: 14px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.8;
+    }
+
+    .hero-affiliations {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 28px;
+      line-height: 1.9;
+    }
+
+    .hero-affiliations sup {
+      font-size: 9px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      border-color: var(--text-secondary);
+      background: #fafafa;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      background: var(--accent-purple);
+      border-color: var(--accent-purple);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #6D28D9;
+      border-color: #6D28D9;
+      color: #fff;
+    }
+
+    /* ─── Finding Block ──────────────────────────────────────────────────── */
+    .finding {
+      background: #f9f9f7;
+      border-left: 3px solid var(--accent-purple);
+      padding: 20px 22px;
+      margin: 0 0 48px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .finding strong {
+      color: var(--text-primary);
+    }
+
+    /* ─── Section Label ──────────────────────────────────────────────────── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+
+    /* ─── Contribution Cards ─────────────────────────────────────────────── */
+    .contributions {
+      margin-bottom: 56px;
+    }
+
+    .contribution-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contribution-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .contribution-card:hover {
+      border-color: var(--accent-purple);
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+    }
+
+    .contribution-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .contribution-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contribution-card-title {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .contribution-card-subtitle {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .contribution-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .contribution-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 12px;
+      color: var(--accent-purple);
+    }
+
+    .contribution-card-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── Figure Placeholders ────────────────────────────────────────────── */
+    .figure {
+      margin: 32px 0;
+    }
+
+    .figure-container {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .figure-placeholder {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .figure-placeholder-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-purple);
+      margin-bottom: 8px;
+    }
+
+    .figure-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .figure-caption {
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: #f9f9f7;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .figure-caption strong {
+      color: var(--text-primary);
+    }
+
+    /* ─── Embed Section ──────────────────────────────────────────────────── */
+    .embed-section {
+      margin-bottom: 56px;
+    }
+
+    .embed-container {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fafafa;
+    }
+
+    .embed-placeholder {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    .embed-placeholder-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .embed-frame {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    /* ─── Pipeline Section ───────────────────────────────────────────────── */
+    .pipeline {
+      margin-bottom: 56px;
+    }
+
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .pipeline-step {
+      text-align: center;
+      padding: 16px 8px;
+      background: #f9f9f7;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .pipeline-step::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    .pipeline-step:last-child::after {
+      display: none;
+    }
+
+    .pipeline-step-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-purple);
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    /* ─── Methods Section ────────────────────────────────────────────────── */
+    .methods {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-heading {
+      font-family: var(--font-body);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+    }
+
+    .methods-subsection {
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .methods-subsection:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .methods-subsection-title {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .methods-subsection p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .methods-subsection code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* ─── Citation Section ───────────────────────────────────────────────── */
+    .citation {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .bibtex-wrap {
+      position: relative;
+      margin-top: 16px;
+    }
+
+    .bibtex-block {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.7;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 18px 20px;
+      overflow-x: auto;
+      white-space: pre;
+      color: var(--text-primary);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--text-secondary);
+      color: var(--text-primary);
+    }
+
+    .copy-btn.copied {
+      color: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    footer a { color: var(--text-tertiary); }
+    footer a:hover { color: var(--text-secondary); }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .topbar { padding: 10px 16px; }
+      .topbar-email { display: none; }
+      .container { padding: 0 16px; }
+      .hero { padding: 36px 0 32px; }
+      .hero-subtitle { font-size: 16px; }
+      .pipeline-steps { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .pipeline-step::after { display: none; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-title { font-size: 26px; }
+      .pipeline-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Top Bar ────────────────────────────────────────────────────────── -->
+  <header class="topbar" role="banner">
+    <a class="topbar-brand" href="#">
+      <span class="topbar-sigil">∀∃</span>
+      <span class="topbar-name">alethic</span>
+    </a>
+    <span class="topbar-email"><a href="mailto:research@alethic.ai">research@alethic.ai</a></span>
+  </header>
+
+  <!-- ─── Main Content ───────────────────────────────────────────────────── -->
+  <main>
+    <div class="container">
+
+      <!-- ─── Hero ─────────────────────────────────────────────────────── -->
+      <section class="hero" aria-labelledby="paper-title">
+        <h1 class="hero-title" id="paper-title">
+          Doing Ethics with AI
+        </h1>
+        <p class="hero-subtitle">Practical Ethics Engineering, Product-Led Philosophy, and Computer-Aided Ethics</p>
+
+        <p class="hero-authors">
+          Sankalpa Ghose<sup>1,4</sup>&nbsp;&nbsp;
+          Kasra Rasaee<sup>2,4</sup>&nbsp;&nbsp;
+          Peter Singer<sup>3</sup>&nbsp;&nbsp;
+          Julian Savulescu<sup>1,3</sup>
+        </p>
+        <p class="hero-affiliations">
+          <sup>1</sup>National University of Singapore&nbsp;&nbsp;
+          <sup>2</sup>Bloomberg&nbsp;&nbsp;
+          <sup>3</sup>University of Oxford&nbsp;&nbsp;
+          <sup>4</sup>Alethic Research
+        </p>
+
+        <div class="hero-actions">
+          <a href="#" class="btn" target="_blank" rel="noopener noreferrer">↗ Read the paper</a>
+          <a href="https://reflectiveequilibrium.ai" class="btn btn-primary" target="_blank" rel="noopener noreferrer">↗ Try SACRE</a>
+          <a href="https://github.com/alethicresearch/alethic-ism" class="btn" target="_blank" rel="noopener noreferrer">↗ Alethic-ISM</a>
+          <button class="btn" onclick="document.getElementById('citation').scrollIntoView({behavior:'smooth'})">Cite ↓</button>
+        </div>
+      </section>
+
+      <!-- ─── Finding Block ──────────────────────────────────────────────── -->
+      <div class="finding" role="note" aria-label="Core thesis">
+        <strong>Computer-aided ethics</strong> proposes using computational systems as instruments of reasoning
+        to better evaluate what to do in situations where it matters. We introduce <strong>practical ethics engineering</strong>
+        as a field and <strong>product-led philosophy</strong> as a research method in which ethical analysis is specified,
+        implemented, and examined through executable computational instruments.
+      </div>
+
+      <!-- ─── Figure 1: Engineering Turn ─────────────────────────────────── -->
+      <figure class="figure">
+        <div class="figure-container">
+          <!-- Replace placeholder with: <img class="figure-img" src="fig1-engineering-turn.png" alt="Ethics with AI proposes an engineering turn for practical ethics"> -->
+          <div class="figure-placeholder">
+            <div class="figure-placeholder-label">Figure 1</div>
+            <p>Ethics with AI — Engineering Turn Diagram</p>
+          </div>
+        </div>
+        <figcaption class="figure-caption">
+          <strong>Figure 1.</strong> Ethics with AI proposes an "engineering turn" for practical ethics.
+        </figcaption>
+      </figure>
+
+      <!-- ─── Normative Computation Pipeline ─────────────────────────────── -->
+      <section class="pipeline">
+        <p class="section-label">Normative Computation Pipeline</p>
+        <div class="pipeline-steps">
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">01</div>
+            <div class="pipeline-step-name">Conceptual Model</div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">02</div>
+            <div class="pipeline-step-name">Calculable Model</div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">03</div>
+            <div class="pipeline-step-name">Executable Model</div>
+          </div>
+          <div class="pipeline-step">
+            <div class="pipeline-step-num">04</div>
+            <div class="pipeline-step-name">AI Model</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── Figure 2: Product-Led Philosophy ───────────────────────────── -->
+      <figure class="figure">
+        <div class="figure-container">
+          <!-- Replace placeholder with: <img class="figure-img" src="fig2-product-led-philosophy.png" alt="Product-led philosophy research cycle"> -->
+          <div class="figure-placeholder">
+            <div class="figure-placeholder-label">Figure 2</div>
+            <p>Product-Led Philosophy — Research Cycle</p>
+          </div>
+        </div>
+        <figcaption class="figure-caption">
+          <strong>Figure 2.</strong> Product-led philosophy is a research method for investigating normative problems. As a field of engineering it seeks to develop interactive instruments and devices; as a method of empiricism it seeks to test these in evaluative and decision-making contexts of computer-aided ethics.
+        </figcaption>
+      </figure>
+
+      <!-- ─── Main Contributions ─────────────────────────────────────────── -->
+      <section class="contributions" aria-label="Main contributions">
+        <p class="section-label">Main Contributions</p>
+
+        <div class="contribution-grid">
+          <div class="contribution-card">
+            <div class="contribution-card-header">
+              <div class="contribution-card-icon" style="background: #EDE9FE;">⚖️</div>
+              <div>
+                <div class="contribution-card-title">SACRE</div>
+                <div class="contribution-card-subtitle">Structurally Analyzed Collective Reflective Equilibrium</div>
+              </div>
+            </div>
+            <p>A formal decision procedure for determining the most coherently justified policy for a given scenario through convergence testing of policy candidates from public preferences, expert judgments, and ethical frameworks.</p>
+            <a href="https://reflectiveequilibrium.ai" class="contribution-card-link" target="_blank" rel="noopener noreferrer">Try the application →</a>
+          </div>
+
+          <div class="contribution-card">
+            <div class="contribution-card-header">
+              <div class="contribution-card-icon" style="background: #DBEAFE;">📊</div>
+              <div>
+                <div class="contribution-card-title">QCS & QCCS</div>
+                <div class="contribution-card-subtitle">Quantified Conceptual Scoring Methods</div>
+              </div>
+            </div>
+            <p>QCS quantifies conceptual intensity on a 0–100 scale. QCCS extends this to pairwise convergence evaluation, providing the normative convergence function used in SACRE's equilibration steps.</p>
+            <a href="https://qcs-qccs.onrender.com" class="contribution-card-link" target="_blank" rel="noopener noreferrer">Interactive demo →</a>
+          </div>
+
+          <div class="contribution-card">
+            <div class="contribution-card-header">
+              <div class="contribution-card-icon" style="background: #D1FAE5;">🔧</div>
+              <div>
+                <div class="contribution-card-title">Alethic-ISM</div>
+                <div class="contribution-card-subtitle">AI Research Workbench</div>
+              </div>
+            </div>
+            <p>A distributed computation engine for building analytic and agentic graphs where every execution step produces a durable, versioned state with an audit trail. Supports large-scale normative computation with full provenance.</p>
+            <a href="https://github.com/alethicresearch/alethic-ism" class="contribution-card-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+          </div>
+
+          <div class="contribution-card">
+            <div class="contribution-card-header">
+              <div class="contribution-card-icon" style="background: #FEF3C7;">🧠</div>
+              <div>
+                <div class="contribution-card-title">SACRE-FT</div>
+                <div class="contribution-card-subtitle">Supervised Fine-Tuning Pipeline</div>
+              </div>
+            </div>
+            <p>A closed-loop architecture where SACRE evaluation outputs become training data for domain-adapted AI models. Execute → Collect → Train → Deploy → Execute.</p>
+          </div>
+
+          <div class="contribution-card">
+            <div class="contribution-card-header">
+              <div class="contribution-card-icon" style="background: #FCE7F3;">📚</div>
+              <div>
+                <div class="contribution-card-title">Bioethics Bench</div>
+                <div class="contribution-card-subtitle">Evaluation Corpus (In Development)</div>
+              </div>
+            </div>
+            <p>A shared corpus for investigating, validating, and improving normative computation across bioethical domains — clinical ethics, research ethics, public health ethics, and more.</p>
+            <a href="https://bioethicsbench.com" class="contribution-card-link" target="_blank" rel="noopener noreferrer">Learn more →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── Figure 18: Application Interface ────────────────────────────── -->
+      <figure class="figure">
+        <div class="figure-container">
+          <!-- Replace placeholder with: <img class="figure-img" src="fig18-sacre-app.png" alt="SACRE application interface"> -->
+          <div class="figure-placeholder">
+            <div class="figure-placeholder-label">Figure 18</div>
+            <p>ReflectiveEquilibrium.AI — Application Interface</p>
+          </div>
+        </div>
+        <figcaption class="figure-caption">
+          <strong>Figure 18.</strong> The SACRE illustrative demo provides a walkthrough within the interactive web application. Users are presented with an interface that lays out the purpose of the analysis along with each step of the SACRE method.
+        </figcaption>
+      </figure>
+
+      <!-- ─── SACRE Graph Embed ──────────────────────────────────────────── -->
+      <section class="embed-section" aria-label="Interactive SACRE graph">
+        <p class="section-label">SACRE Computational Graph in Alethic-ISM</p>
+        <div class="embed-container">
+          <!-- Replace with actual embed URL when available -->
+          <div class="embed-placeholder">
+            <div class="embed-placeholder-icon">📐</div>
+            <p>Interactive SACRE graph visualization</p>
+            <p style="font-size: 12px; margin-top: 8px;">Embed URL to be added</p>
+          </div>
+          <!-- Uncomment and add URL when ready:
+          <iframe class="embed-frame" src="YOUR_ISM_EMBED_URL" title="SACRE Computational Graph"></iframe>
+          -->
+        </div>
+      </section>
+
+    </div><!-- /.container -->
+
+    <!-- ─── Methods ────────────────────────────────────────────────────── -->
+    <div class="container">
+      <section class="methods" aria-labelledby="methods-heading">
+        <h2 class="section-heading" id="methods-heading">The SACRE Method</h2>
+
+        <!-- ─── Figure 15: SACRE Decision Procedure ────────────────────── -->
+        <figure class="figure" style="margin-top: 0;">
+          <div class="figure-container">
+            <!-- Replace placeholder with: <img class="figure-img" src="fig15-sacre-procedure.png" alt="SACRE decision procedure diagram"> -->
+            <div class="figure-placeholder">
+              <div class="figure-placeholder-label">Figure 15</div>
+              <p>SACRE Decision Procedure Diagram</p>
+            </div>
+          </div>
+          <figcaption class="figure-caption">
+            <strong>Figure 15.</strong> Structurally Analyzed Collective Reflective Equilibrium (SACRE). Step 1 identifies the Scenario. Steps 2A, 2B, 2C collect Policy candidates from public preferences, expert judgments, and ethical frameworks. Step 3 performs Public–Expert Equilibration. Step 4 performs Public–Expert–Framework Equilibration. Step 5 selects the Final Policy Π*.
+          </figcaption>
+        </figure>
+
+        <div class="methods-subsection">
+          <h3 class="methods-subsection-title">Step 1: Scenario Identification</h3>
+          <p>Identify the scenario <code>S</code> in need of policy determination. The scenario defines the case, context, or practical problem requiring a policy recommendation.</p>
+        </div>
+
+        <div class="methods-subsection">
+          <h3 class="methods-subsection-title">Step 2: Policy Candidate Identification</h3>
+          <p>Collect policy candidates from three independent normative sources: public preferences (<code>Π<sup>pub</sup></code>), expert judgments (<code>Π<sup>exp</sup></code>), and ethical frameworks (<code>Π<sup>fw</sup></code>). Each source provides distinct perspectives grounded in lived experience, empirical evidence, or systematic normative theories.</p>
+        </div>
+
+        <div class="methods-subsection">
+          <h3 class="methods-subsection-title">Step 3: Public–Expert Equilibration</h3>
+          <p>Measure pairwise convergence between all public and expert policy candidates using QCCS. Aggregate scores into policy coherence profiles and produce <code>P′</code>, the initial equilibrated set rank-ordered by coherence.</p>
+        </div>
+
+        <div class="methods-subsection">
+          <h3 class="methods-subsection-title">Step 4: Public–Expert–Framework Equilibration</h3>
+          <p>Measure convergence between the initial equilibrated set and framework candidates. Aggregate to produce <code>P″</code>, the final equilibrated set of all policy candidates rank-ordered by total coherence.</p>
+        </div>
+
+        <div class="methods-subsection">
+          <h3 class="methods-subsection-title">Step 5: Final Policy Selection</h3>
+          <p>Select <code>Π* = argmax Score″(Π)</code> — the policy with the highest total convergence score across all pairwise comparisons is designated as the most coherently justified policy for the scenario.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ─── Citation ───────────────────────────────────────────────────── -->
+    <div class="container">
+      <section class="citation" id="citation" aria-labelledby="citation-heading">
+        <h2 class="section-heading" id="citation-heading">Cite this work</h2>
+
+        <div class="bibtex-wrap">
+          <pre class="bibtex-block" id="bibtex-content">@article{ghose2026doingethics,
+  title   = {Doing Ethics with AI},
+  author  = {Ghose, Sankalpa and Rasaee, Kasra and Singer, Peter
+             and Savulescu, Julian},
+  journal = {[Journal TBD]},
+  year    = {2026},
+  note    = {Application: https://reflectiveequilibrium.ai
+             Alethic-ISM: https://github.com/alethicresearch/alethic-ism}
+}</pre>
+          <button class="copy-btn" id="copy-btn" onclick="copyBibtex()" aria-label="Copy BibTeX citation">Copy</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <a href="https://reflectiveequilibrium.ai" target="_blank" rel="noopener noreferrer">ReflectiveEquilibrium.AI</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/alethicresearch/alethic-ism" target="_blank" rel="noopener noreferrer">Alethic-ISM</a>
+    &nbsp;·&nbsp;
+    <a href="https://bioethicsbench.com" target="_blank" rel="noopener noreferrer">Bioethics Bench</a>
+  </footer>
+
+  <!-- ─── Scripts ────────────────────────────────────────────────────────── -->
+  <script>
+    function copyBibtex() {
+      const content = document.getElementById('bibtex-content').textContent;
+      navigator.clipboard.writeText(content).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
