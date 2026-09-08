@@ -34,7 +34,7 @@
     .actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
     .btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:9px 13px;font-size:12px;font-weight:500}
     .btn.primary{background:var(--purple);border-color:var(--purple);color:#fff}.btn:hover{text-decoration:none;border-color:#aaa59c}
-    .more-toggle{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--muted)}
+    .more-toggle{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);padding:9px 11px}
     .more-toggle .tri{display:inline-block;font-size:9px;transition:transform .15s ease;color:var(--faint)}
     .more-toggle[aria-expanded="true"] .tri{transform:rotate(90deg)}
     .more-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
@@ -119,12 +119,12 @@
   <aside class="hero-side">
     <div class="actions">
       <a class="btn primary" href="https://reflectiveequilibrium.ai" target="_blank" rel="noopener">ReflectiveEquilibrium.AI ↗</a>
-      <button type="button" class="btn more-toggle" id="moreToggle" aria-expanded="false" aria-controls="moreLinks" onclick="
+      <button type="button" class="btn more-toggle" id="moreToggle" aria-expanded="false" aria-controls="moreLinks" aria-label="More instruments" onclick="
         var b=this, l=document.getElementById('moreLinks'), open=b.getAttribute('aria-expanded')==='true';
         b.setAttribute('aria-expanded', String(!open));
         l.hidden = open;
       ">
-        <span class="tri">▶</span> More instruments
+        <span class="tri">▶</span>
       </button>
     </div>
     <div class="more-links" id="moreLinks" hidden>
