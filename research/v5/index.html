@@ -37,8 +37,9 @@
     .more-toggle{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);padding:9px 11px}
     .more-toggle .tri{display:inline-block;font-size:9px;transition:transform .15s ease;color:var(--faint)}
     .more-toggle[aria-expanded="true"] .tri{transform:rotate(90deg)}
-    .more-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+    .more-links{margin-top:10px}
     .more-links[hidden]{display:none}
+    .more-links-row{display:flex;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px dashed var(--line)}
     .hero-side{width:100%}
     .btn:focus-visible,.more-toggle:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
     .thesis{margin-bottom:42px}
@@ -128,11 +129,17 @@
       </button>
     </div>
     <div class="more-links" id="moreLinks" hidden>
-      <a class="btn" href="https://scijust.ai" target="_blank" rel="noopener">SciJust.AI ↗</a>
-      <a class="btn" href="https://wtp-ai.alethicresearch.com" target="_blank" rel="noopener">WTP-AI ↗</a>
-      <a class="btn" href="https://felicific.ai" target="_blank" rel="noopener">Felicific.AI ↗</a>
-      <a class="btn" href="https://felicific.ai/normativision" target="_blank" rel="noopener">NormatiVision ↗</a>
-      <a class="btn" href="https://practicalethics.ai" target="_blank" rel="noopener">PracticalEthics.AI ↗</a>
+      <div class="more-links-row">
+        <a class="btn" href="https://scijust.ai" target="_blank" rel="noopener">SciJust.AI ↗</a>
+        <a class="btn" href="https://wtp-ai.alethicresearch.com" target="_blank" rel="noopener">WTP-AI ↗</a>
+        <a class="btn" href="https://felicific.ai" target="_blank" rel="noopener">Felicific.AI ↗</a>
+        <a class="btn" href="https://felicific.ai/normativision" target="_blank" rel="noopener">NormatiVision ↗</a>
+        <a class="btn" href="https://practicalethics.ai" target="_blank" rel="noopener">PracticalEthics.AI ↗</a>
+      </div>
+      <div class="more-links-row">
+        <a class="btn" href="https://bioethicsbench.org" target="_blank" rel="noopener">Bioethics Bench ↗</a>
+        <a class="btn" href="https://github.com/alethicresearch/alethic-ism" target="_blank" rel="noopener">Alethic-ISM ↗</a>
+      </div>
     </div>
   </aside>
 </div></section>
