@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Doing Ethics with AI: practical ethics engineering, product-led philosophy, normative computation, and computer-aided ethics.">
+  <title>Doing Ethics with AI — Research Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fbfbfa;--paper:#fff;--ink:#181817;--muted:#6b6862;--faint:#9a968d;--line:#e4e1da;
+      --soft:#f5f3ee;--purple:#6d4aff;--purple-soft:#f2efff;--blue:#185fa5;--green:#0f6e56;
+      --amber:#a8660b;--red:#b8482d;--display:'EB Garamond',Georgia,serif;--body:'DM Sans',system-ui,sans-serif;
+      --mono:'Fira Code',monospace;--max:1180px;--shadow:0 10px 30px rgba(28,25,20,.045)
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font:15px/1.62 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:auto;padding:0 28px}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(251,251,250,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .topbar-inner{max-width:var(--max);margin:auto;padding:11px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}.brand img{width:20px;height:20px}
+    .nav{display:flex;gap:18px;color:var(--muted);font-size:12px}
+    .hero{padding:72px 0 48px}.hero-grid{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(280px,.72fr);gap:52px;align-items:end}
+    .eyebrow,.kicker,.code,.phase{font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em}
+    .eyebrow{font-size:11px;color:var(--purple);margin-bottom:13px}
+    h1{font:500 clamp(48px,7.5vw,82px)/.94 var(--display);letter-spacing:-.03em;max-width:820px}
+    .hero-sub{font-size:20px;line-height:1.42;color:var(--muted);max-width:800px;margin-top:20px}
+    .hero-side{border-left:1px solid var(--line);padding-left:24px}.hero-side p{font-size:13px;color:var(--muted)}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:9px 13px;font-size:12px;font-weight:500}
+    .btn.primary{background:var(--purple);border-color:var(--purple);color:#fff}.btn:hover{text-decoration:none;border-color:#aaa59c}
+    .more-toggle{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--muted)}
+    .more-toggle .tri{display:inline-block;font-size:9px;transition:transform .15s ease;color:var(--faint)}
+    .more-toggle[aria-expanded="true"] .tri{transform:rotate(90deg)}
+    .more-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+    .more-links[hidden]{display:none}
+    .hero-side{width:100%}
+    .btn:focus-visible,.more-toggle:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+    .thesis{margin-bottom:42px}
+    .thesis-primary{position:relative;background:var(--purple-soft);border:1px solid #ded5ff;border-radius:12px;padding:27px 30px;overflow:hidden}
+    .thesis-primary::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple)}
+    .thesis-primary .code{font-size:10px;color:var(--purple);margin-bottom:9px}
+    .thesis-primary h3{font:500 clamp(24px,3.4vw,31px)/1.08 var(--display);letter-spacing:-.02em;margin-bottom:9px;max-width:660px}
+    .thesis-primary p{font-size:14px;color:var(--muted);max-width:580px}
+    .thesis-adjacent{margin-top:14px}
+    .thesis-adjacent .kicker{margin-bottom:8px}
+    .thesis-rail{display:flex;flex-wrap:wrap;gap:9px}
+    .thesis-card{background:#fff;border:1px solid var(--line);border-radius:7px;padding:11px 13px;flex:1 1 200px;max-width:220px}
+    .thesis-card .code{font-size:8.5px;color:var(--faint);margin-bottom:4px}
+    .thesis-card h3{font-size:12px;margin-bottom:2px}.thesis-card p{font-size:10.5px;color:var(--muted);line-height:1.4}
+    section{padding:48px 0;border-top:1px solid var(--line)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:22px}
+    .kicker{font-size:10.5px;color:var(--faint);margin-bottom:5px}
+    h2{font:500 36px/1.05 var(--display);letter-spacing:-.015em}
+    .section-head p{max-width:525px;text-align:right;color:var(--muted);font-size:13px}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);overflow:hidden}
+    .panel-body{padding:24px}.panel-foot{border-top:1px solid var(--line);background:#faf9f6;padding:12px 18px;color:var(--muted);font-size:11.5px}
+    .spine{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .spine-card{position:relative;border:1px solid var(--line);border-radius:9px;padding:17px 15px;background:#fff;min-height:192px}
+    .spine-card:not(:last-child)::after{content:'→';position:absolute;right:-19px;top:31px;background:#fff;color:#aaa59c;padding:0 4px;z-index:3}
+    .spine-card .code{font-size:11px;color:var(--purple);margin-bottom:10px}.spine-card h3{font-size:15px;line-height:1.28;margin-bottom:8px}
+    .spine-card p{font-size:12px;color:var(--muted);line-height:1.55}.phase{font-size:9px;color:var(--faint);margin-top:14px}
+    .parallel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    .parallel{background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:16px}
+    .parallel h3{font-size:14px;margin-bottom:5px}.parallel p{font-size:12px;color:var(--muted)}
+    .arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .arch-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+    .arch-card h3{font-size:14px;margin-bottom:14px}
+    .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+    .step{position:relative;border:1px solid var(--line);background:var(--soft);border-radius:7px;padding:12px 7px;text-align:center}
+    .step:not(:last-child)::after{content:'→';position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:#aaa59c}
+    .step span{display:block;font:500 9px var(--mono);color:var(--purple);margin-bottom:3px}.step b{font-size:10.5px}
+    .cycle .step{background:#fff}.cycle .step span{color:var(--green)}
+    .sacre{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px}
+    .sacre-copy{background:#171716;color:#f3f1ea;border-radius:11px;padding:24px}
+    .sacre-copy h3{font:500 28px/1.06 var(--display);margin-bottom:10px}.sacre-copy p{font-size:12.5px;color:#bbb7ae}
+    .sacre-copy .mini{border-top:1px solid #373631;margin-top:14px;padding-top:13px;font-size:11.5px;color:#aaa69e}
+    .sacre-flow{border:1px solid var(--line);border-radius:11px;background:#fff;padding:18px}
+    .sources{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.source{border-radius:7px;padding:10px;text-align:center;font-size:11px;font-weight:600}
+    .source.pub{background:#eaf3fb;color:var(--blue)}.source.exp{background:#e8f4ef;color:var(--green)}.source.fw{background:#fbf2df;color:var(--amber)}
+    .down{text-align:center;color:#aaa59c;padding:5px}.stage{border:1px solid var(--line);background:#faf9f6;border-radius:7px;padding:9px;text-align:center;font-size:11px;margin-bottom:6px}
+    .stage b{display:block}.stage.final{background:var(--purple-soft)}.stage.revise{background:#faece7}
+    .instrument-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .instrument{background:#fff;border:1px solid var(--line);border-radius:9px;padding:16px}
+    .instrument .code{font-size:9px;color:var(--faint)}.instrument h3{font-size:14px;margin:6px 0}.instrument p{font-size:11.5px;color:var(--muted)}
+    .instrument a{display:inline-block;margin-top:9px;font-size:11px;color:var(--blue);font-weight:600}
+    .validation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .validation{background:#fff;border:1px solid var(--line);border-radius:9px;padding:17px}
+    .validation .code{font-size:9.5px;color:var(--purple)}.validation h3{font-size:14px;margin:7px 0}.validation p{font-size:12px;color:var(--muted)}
+    .domain{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.domain p{color:var(--muted);font-size:13px}
+    .domain-list{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}.domain-list div{padding:10px 13px;border-bottom:1px solid var(--line);font-size:11.5px}.domain-list div:last-child{border-bottom:0}.domain-list b{font:500 9px var(--mono);color:var(--purple);margin-right:8px}
+    .footer{border-top:1px solid var(--line);padding:25px 0 40px;color:var(--faint);font-size:11px;display:flex;justify-content:space-between;gap:20px}
+    @media(max-width:900px){
+      .nav{display:none}.hero-grid,.arch-grid,.sacre,.domain{grid-template-columns:1fr}.hero-side{border-left:0;border-top:1px solid var(--line);padding:18px 0 0}
+      .spine,.parallel-grid,.instrument-grid,.validation-grid{grid-template-columns:1fr}.spine-card{min-height:0}.spine-card:not(:last-child)::after{content:'↓';right:auto;left:22px;top:auto;bottom:-18px}
+      .thesis-primary{padding:22px}
+      .thesis-card{max-width:none;flex:1 1 140px}
+      .section-head{display:block}.section-head p{text-align:left;margin-top:8px}.pipeline{grid-template-columns:repeat(2,1fr)}.cycle{grid-template-columns:repeat(2,1fr)}.step::after{display:none}
+    }
+    @media(max-width:520px){.wrap,.topbar-inner{padding-left:17px;padding-right:17px}.hero{padding-top:48px}.hero-sub{font-size:17px}.pipeline,.cycle,.sources{grid-template-columns:1fr}.footer{display:block}.footer span{display:block;margin-top:5px}}
+  </style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="../"><img src="../favicon.png" alt="Alethic"><strong>Doing Ethics with AI</strong></a>
+  <nav class="nav"><a href="#program">Program</a><a href="#method">Method</a><a href="#instruments">Instruments</a><a href="#validation">Validation</a><a href="#bioethics">Bioethics</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<section class="hero" style="border-top:0"><div class="hero-grid">
+  <div><div class="eyebrow">Doing Ethics with AI · Research Program</div>
+    <p class="hero-sub">Practical ethics engineering, product-led philosophy, normative computation, and computer-aided ethics.</p>
+  </div>
+  <aside class="hero-side">
+    <div class="actions">
+      <a class="btn primary" href="https://reflectiveequilibrium.ai" target="_blank" rel="noopener">ReflectiveEquilibrium.AI ↗</a>
+      <button type="button" class="btn more-toggle" id="moreToggle" aria-expanded="false" aria-controls="moreLinks" onclick="
+        var b=this, l=document.getElementById('moreLinks'), open=b.getAttribute('aria-expanded')==='true';
+        b.setAttribute('aria-expanded', String(!open));
+        l.hidden = open;
+      ">
+        <span class="tri">▶</span> More instruments
+      </button>
+    </div>
+    <div class="more-links" id="moreLinks" hidden>
+      <a class="btn" href="https://scijust.ai" target="_blank" rel="noopener">SciJust.AI ↗</a>
+      <a class="btn" href="https://wtp-ai.alethicresearch.com" target="_blank" rel="noopener">WTP-AI ↗</a>
+      <a class="btn" href="https://felicific.ai" target="_blank" rel="noopener">Felicific.AI ↗</a>
+      <a class="btn" href="https://felicific.ai/normativision" target="_blank" rel="noopener">NormatiVision ↗</a>
+      <a class="btn" href="https://practicalethics.ai" target="_blank" rel="noopener">PracticalEthics.AI ↗</a>
+    </div>
+  </aside>
+</div></section>
+
+<div class="thesis">
+  <div class="thesis-primary">
+    <div class="code">Doing Ethics with AI</div>
+    <h3>How can people do ethics better?</h3>
+    <p>Computational instruments for normative reasoning and action.</p>
+  </div>
+  <div class="thesis-adjacent">
+    <div class="kicker">As distinct from</div>
+    <div class="thesis-rail">
+      <div class="thesis-card"><div class="code">Machine ethics</div><h3>How should machines act?</h3><p>Systems that make or implement ethically relevant decisions.</p></div>
+      <div class="thesis-card"><div class="code">Ethics of AI</div><h3>How should AI be governed?</h3><p>Ethical implications, risks, institutions, and design.</p></div>
+    </div>
+  </div>
+</div>
+
+<section id="program">
+  <div class="section-head"><div><div class="kicker">Figure 1 · Core spine</div><h2>Research Program</h2></div></div>
+  <div class="panel"><div class="panel-body">
+    <div class="spine">
+      <div class="spine-card"><div class="code">P1</div><h3>Doing Ethics with AI</h3><p>Establish the paradigm and build the worked method: SACRE, QCS/QCCS, executable construction, and ReflectiveEquilibrium.AI.</p><div class="phase">Specification / construction / deployment</div></div>
+      <div class="spine-card"><div class="code">P2</div><h3>Computational Validation</h3><p>Characterize reliability, robustness, model and representation effects, convergence specifications, ranking, and re-iteration.</p><div class="phase">Controlled technical validation</div></div>
+      <div class="spine-card"><div class="code">P3</div><h3>Human Comparative Validation</h3><p>Compare human–human and human–model judgments on matched, frozen normative objects.</p><div class="phase">Human empirical validation</div></div>
+      <div class="spine-card"><div class="code">P4+</div><h3>Programmatic Deployments</h3><p>Study validated computer-aided ethics systems in real institutional decision processes.</p><div class="phase">Prospective use / effects</div></div>
+    </div>
+    <div class="parallel-grid">
+      <div class="parallel"><h3>Alethic-ISM</h3><p>Parallel systems contribution: graph execution, state, provenance, replay, and cross-workflow infrastructure.</p></div>
+      <div class="parallel"><h3>Bioethics Bench</h3><p>Parallel research resource: source-grounded, versioned normative objects for computational and human study.</p></div>
+      <div class="parallel"><h3>Computational Bioethics</h3><p>Major domain realization: a bioethics-facing synthesis of engineered normative systems and methods.</p></div>
+    </div>
+  </div><div class="panel-foot"><strong>Program architecture.</strong> P1–P3 form the foundational validation sequence; P4+ extends the work into prospective deployments. Parallel contributions develop the research program in further applied and technical directions.</div></div>
+</section>
+
+<section id="method">
+  <div class="section-head"><div><div class="kicker">Method</div><h2>From philosophical method to inspectable artifact.</h2></div></div>
+  <div class="arch-grid">
+    <div class="arch-card"><h3>Normative computation pipeline</h3><div class="pipeline">
+      <div class="step"><span>01</span><b>Conceptual model</b></div><div class="step"><span>02</span><b>Calculable model</b></div><div class="step"><span>03</span><b>Executable model</b></div><div class="step"><span>04</span><b>Interactive application</b></div>
+    </div></div>
+    <div class="arch-card"><h3>Product-led philosophy</h3><div class="cycle">
+      <div class="step"><span>01</span><b>Specify</b></div><div class="step"><span>02</span><b>Construct</b></div><div class="step"><span>03</span><b>Design</b></div><div class="step"><span>04</span><b>Deploy</b></div><div class="step"><span>05</span><b>Investigate</b></div>
+    </div></div>
+  </div>
+</section>
+
+<section id="sacre">
+  <div class="section-head"><div><div class="kicker">Worked method</div><h2>SACRE makes reflective equilibrium executable.</h2></div></div>
+  <div class="sacre">
+    <div class="sacre-copy"><h3>Structurally Analyzed Collective Reflective Equilibrium</h3><p>SACRE maps cross-source normative convergence among Public, Expert, and Framework Policy candidates, ranks the resulting coherence field, and permits directed revision followed by renewed equilibration.</p><div class="mini">Step 5 is provisional. Step 6 revises selected positions and returns the updated configuration to the same evaluative procedure.</div></div>
+    <div class="sacre-flow"><div class="sources"><div class="source pub">Public preferences</div><div class="source exp">Expert judgments</div><div class="source fw">Normative frameworks</div></div><div class="down">↓</div>
+      <div class="stage"><b>Step 3</b>Public–Expert equilibration</div><div class="stage"><b>Step 4</b>Public–Expert–Framework equilibration</div><div class="stage final"><b>Step 5</b>Provisional Final Policy</div><div class="down">↓</div><div class="stage revise"><b>Step 6</b>Directed revision → re-equilibrate</div>
+    </div>
+  </div>
+</section>
+
+<section id="instruments">
+  <div class="section-head"><div><div class="kicker">Research objects</div></div></div>
+  <div class="instrument-grid">
+    <div class="instrument"><div class="code">Application</div><h3>ReflectiveEquilibrium.AI</h3><p>Purpose-built SACRE application for execution, inspection, comparison, and re-iteration.</p><a href="https://reflectiveequilibrium.ai" target="_blank" rel="noopener">Open ↗</a></div>
+    <div class="instrument"><div class="code">Measurement</div><h3>QCS & QCCS</h3><p>Scalar conceptual scoring and pairwise convergence judgments used within normative computation.</p><a href="https://qcs-qccs.onrender.com" target="_blank" rel="noopener">Demo ↗</a></div>
+    <div class="instrument"><div class="code">Infrastructure</div><h3>Alethic-ISM</h3><p>Domain-neutral graph execution with persistent state, provenance, replay, and multi-model processing.</p><a href="https://github.com/alethicresearch/alethic-ism" target="_blank" rel="noopener">Repository ↗</a></div>
+    <div class="instrument"><div class="code">Resource</div><h3>Bioethics Bench</h3><p>Source-grounded normative research objects for controlled computational and human comparison.</p><a href="https://bioethicsbench.com" target="_blank" rel="noopener">Explore ↗</a></div>
+  </div>
+</section>
+
+<section id="validation">
+  <div class="section-head"><div><div class="kicker">Evidence program</div><h2>Validation asks different questions.</h2></div></div>
+  <div class="validation-grid">
+    <div class="validation"><div class="code">P2 · Computational</div><h3>Does it behave reliably?</h3><p>Repeatability, robustness, model/provider and representation effects, aggregation sensitivity, ranking stability, re-iteration, and alternative QCCS/convergence specifications including conv⁺, conv⁻, and conv±.</p></div>
+    <div class="validation"><div class="code">P3 · Human</div><h3>How does it compare with people?</h3><p>Human–human reliability, human–model correspondence, expert/lay variation, disagreement localization, and downstream ranking effects.</p></div>
+    <div class="validation"><div class="code">P4+ · Use</div><h3>What happens in practice?</h3><p>Feasibility, reliance, deliberation, documentation, governance, error recovery, user experience, and practical outcomes.</p></div>
+  </div>
+</section>
+
+<section id="bioethics">
+  <div class="section-head"><div><div class="kicker">Domain realization</div><h2>Computational bioethics.</h2></div></div>
+  <div class="domain"><p>Bioethics combines philosophical methods, empirical evidence, professional judgment, institutional procedures, and consequential decisions. It therefore provides a natural setting in which to build and test engineered normative methods.</p>
+    <div class="domain-list"><div><b>01</b>Conceptual foundations</div><div><b>02</b>Executable normative methods</div><div><b>03</b>Interactive research instruments</div><div><b>04</b>Shared research resources</div><div><b>05</b>Computational & human validation</div><div><b>06</b>Prospective computer-aided ethics</div></div>
+  </div>
+</section>
+
+<footer class="footer"><div>Doing Ethics with AI · 2026</div><span>Practical Ethics Engineering · Product-Led Philosophy · Normative Computation · Computer-Aided Ethics</span></footer>
+</div></main>
+</body>
+</html>
